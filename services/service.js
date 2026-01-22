@@ -1,7 +1,8 @@
 import axios from "axios";
 
-// const ConstantsUrl = "http://localhost:3003/api/";
-const ConstantsUrl = "https://api.jasznco.com/api/";
+export const ConstantsUrl = "http://localhost:8001/";
+// export const ConstantsUrl = "https://api.tobaline.com/";
+
 
 function handleAuthError(err, router) {
   if (typeof window !== "undefined") {
@@ -51,9 +52,9 @@ async function Api(method, url, datas, router) {
         if (err.response) {
           if (err?.response?.status === 401) {
             if (typeof window !== "undefined") {
-              console.log("sdfvgbhn", err.response);
-              localStorage.removeItem("userDetail");
-              router.push("/login");
+              // console.log("", err.response);
+              // localStorage.removeItem("userDetail");
+              // router.push("/login");
             }
           }
           reject(err.response.data);

@@ -130,7 +130,7 @@ function Settings(props) {
       <section className="w-full bg-gray-50 md:p-8 p-4 h-[90vh] overflow-y-scroll scrollbar-hide overflow-scroll pb-32">
         <div className="mb-8">
           <h2 className="text-gray-800 font-bold md:text-3xl text-xl mb-4 flex items-center">
-            <span className="w-1 h-8 bg-[#F38529] rounded mr-3"></span>
+            <span className="w-1 h-8 bg-black rounded mr-3"></span>
             HomePage Instagram Follow Section Image
           </h2>
 
@@ -181,7 +181,7 @@ function Settings(props) {
                   </p>
                   <button
                     type="button"
-                    className="text-white bg-[#127300] hover:bg-green-600 transition-colors rounded-lg text-md py-2.5 px-6 font-medium shadow-sm"
+                    className="text-white bg-black transition-colors rounded-lg text-md py-2.5 px-6 font-medium shadow-sm"
                     onClick={() => {
                       if (singleInstaImg === "") {
                         props.toaster({
@@ -226,7 +226,7 @@ function Settings(props) {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="text-white bg-[#127300] hover:bg-green-600 transition-colors rounded-lg text-md font-medium py-2.5 px-6 shadow-sm"
+                    className="text-white bg-black transition-colors rounded-lg text-md font-medium py-2.5 px-6 shadow-sm"
                   >
                     Submit Instagram Images
                   </button>

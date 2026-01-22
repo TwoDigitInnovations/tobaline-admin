@@ -69,11 +69,11 @@ function Home(props) {
     },
   ]);
 
-  useEffect(() => {
-    TopSoldProduct();
-    dashboarddetails();
-    getLowStockProduct();
-  }, []);
+  // useEffect(() => {
+  //   TopSoldProduct();
+  //   dashboarddetails();
+  //   getLowStockProduct();
+  // }, []);
 
   const dashboarddetails = async () => {
     props.loader(true);
@@ -119,7 +119,7 @@ function Home(props) {
         }
       );
     };
-    getMonthlySales();
+    // getMonthlySales();
   }, [selectedYear]);
 
   const TopSoldProduct = (page = 1, limit = 8) => {
@@ -193,15 +193,15 @@ function Home(props) {
       <div className="max-w-7xl mx-auto space-y-6">
 
         <div className="relative overflow-hidden bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FE4F01]/5 rounded-full -translate-y-32 translate-x-32"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#127300]/5 rounded-full translate-y-24 -translate-x-24"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-black/5 rounded-full -translate-y-32 translate-x-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#e5e5e5]/5 rounded-full translate-y-24 -translate-x-24"></div>
 
           <div className="relative z-10 flex justify-between items-center">
             <div>
               <div className="flex items-center mb-2">
-                <div className="w-1.5 h-12 bg-[#FE4F01] rounded-full mr-4"></div>
+                <div className="w-1.5 h-12 bg-black rounded-full mr-4"></div>
                 <h1 className="text-4xl md:text-5xl font-black tracking-tight text-gray-900">
-                  Analytics <span className="text-[#FE4F01]">Hub</span>
+                  Analytics <span className="text-black">Hub</span>
                 </h1>
               </div>
               <p className="text-gray-600 text-lg font-medium">
@@ -210,9 +210,9 @@ function Home(props) {
             </div>
             <div className="hidden md:flex items-center space-x-4">
               <div className="bg-gray-100 rounded-2xl px-6 py-3 border border-gray-200">
-                <div className="text-[#FE4F01] font-bold text-sm">LIVE STATUS</div>
+                <div className="text-black font-bold text-sm">LIVE STATUS</div>
                 <div className="flex items-center mt-1">
-                  <div className="w-2 h-2 bg-[#127300] rounded-full mr-2"></div>
+                  <div className="w-2 h-2 bg-[#e5e5e5] rounded-full mr-2"></div>
                   <span className="text-gray-700 text-sm">All Systems Active</span>
                 </div>
               </div>
@@ -225,21 +225,21 @@ function Home(props) {
             title="Active Users"
             value={AllData?.totalUsers || "1,247"}
             icon={<Users size={28} />}
-            accentColor="#FE4F01"
+            accentColor="#000"
 
           />
           <ModernStatsCard
             title="Categories"
             value={AllData?.totalCategories || "89"}
             icon={<Layers size={28} />}
-            accentColor="#FE4F01"
+            accentColor="#000"
 
           />
           <ModernStatsCard
             title="Revenue"
             value={`$${AllData?.totalTransactionAmount || "89,420"}`}
             icon={<DollarSign size={28} />}
-            accentColor="#FE4F01"
+            accentColor="#000"
 
           />
           <ModernStatsCard
@@ -247,7 +247,7 @@ function Home(props) {
             value={AllData?.totalFeedbacks || "156"}
             icon={<HelpCircle size={28} />}
 
-            accentColor="#FE4F01"
+            accentColor="#000"
 
           />
         </div>
@@ -273,7 +273,7 @@ function Home(props) {
                       </option>
                     ))}
                   </select>
-                  <div className="flex  bg-[#FE4F01] rounded-lg">
+                  <div className="flex  bg-black rounded-lg">
                     <button className=" text-white px-4 py-2 text-sm font-medium">
                       Monthly
                     </button>
@@ -366,17 +366,17 @@ function Home(props) {
 
           {/* Top Products Table */}
           <div className="lg:col-span-2 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
-            <div className="bg-[#127300] p-6 text-white">
+            <div className="bg-[#e5e5e5] p-6 text-black">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-xl font-bold flex items-center">
                     <TrendingUp className="mr-2" size={24} />
                     Bestsellers
                   </h2>
-                  <p className="text-gray-100 mt-1">Your top performing products</p>
+                  <p className="text-black mt-1">Your top performing products</p>
                 </div>
-                <div className="bg-white px-4 py-2 rounded-lg">
-                  <span className="text-sm font-medium text-[#127300]">Live Data</span>
+                <div className="bg-black px-4 py-2 rounded-lg">
+                  <span className="text-sm font-medium text-white">Live Data</span>
                 </div>
               </div>
             </div>
@@ -400,12 +400,12 @@ function Home(props) {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#127300]/10 text-[#127300]">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#e5e5e5]/10 text-[#127300]">
                           {product?.sold_pieces}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${product?.pieces < 10 ? 'bg-[#FE4F01]/10 text-[#FE4F01]' : 'bg-[#127300]/10 text-[#127300]'
+                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${product?.pieces < 10 ? 'bg-black/10 text-black' : 'bg-[#e5e5e5]/10 text-[#127300]'
                           }`}>
                           {product?.pieces}
                         </span>
@@ -421,7 +421,7 @@ function Home(props) {
           </div>
 
           <div className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
-            <div className="bg-[#FE4F01] p-6 text-white">
+            <div className="bg-black p-6 text-white">
               <h2 className="text-xl font-bold flex items-center">
                 <AlertTriangle className="mr-2" size={24} />
                 Stock Alert
@@ -454,7 +454,7 @@ function Home(props) {
                     </div>
                   </div>
                   <div className="flex-shrink-0">
-                    <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-bold bg-[#FE4F01] text-white">
+                    <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-bold bg-black text-white">
                       LOW
                     </span>
                   </div>

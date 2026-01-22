@@ -8,6 +8,7 @@ import {
   ShoppingCart,
   ArrowRight,
   SquareAsterisk,
+  ArrowLeft,
 } from "lucide-react";
 import { Api } from "../services/service";
 import { userContext } from "./_app";
@@ -25,14 +26,13 @@ export default function Login(props) {
   const [otp, setOtp] = useState("");
 
   const [userDetail, setUserDetail] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
-  /* ================= SEND OTP ================= */
   const sendOtp = async () => {
     setSubmitted(true);
-    if (!userDetail.username || !userDetail.password) {
+    if (!userDetail.email || !userDetail.password) {
       return props.toaster({ type: "error", message: "Missing credentials" });
     }
 
@@ -42,7 +42,7 @@ export default function Login(props) {
 
       const res = await Api(
         "post",
-        "loginwithOtp",
+        "auth/loginwithOtp",
         { ...userDetail, ipConfing: userInfo, action: "sendOtpForLogin" },
         router,
       );
@@ -63,23 +63,24 @@ export default function Login(props) {
     }
   };
 
-  /* ================= VERIFY OTP ================= */
   const submit = async () => {
     setSubmitted(true);
     if (!otp) {
       return props.toaster({ type: "error", message: "OTP is required" });
     }
+    const data = {
+      token,
+      otp,
+      ipConfing: userInfo,
+      action: "verifyOTPForLogin",
+    };
+    console.log(data);
 
     try {
       setLoading(true);
       props.loader(true);
 
-      const res = await Api(
-        "post",
-        "verifyOTPForLogin",
-        { token, otp, ipConfing: userInfo, action: "verifyOTPForLogin" },
-        router,
-      );
+      const res = await Api("post", "auth/verifyOTPForLogin", data, router);
 
       props.loader(false);
       setLoading(false);
@@ -89,7 +90,7 @@ export default function Login(props) {
         localStorage.setItem("token", res.data.token);
         setUser(res.data);
 
-        router.push(res.data.type === "ADMIN" ? "/" : "/inventory");
+        router.push(res.data.role === "ADMIN" ? "/" : "/inventory");
       } else {
         props.toaster({ type: "error", message: res.message });
       }
@@ -101,8 +102,7 @@ export default function Login(props) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
-      {/* Background pattern */}
+    <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden px-4">
       <div
         className="absolute inset-0 opacity-10"
         style={{
@@ -112,38 +112,43 @@ export default function Login(props) {
         }}
       />
 
-      {/* Login Card */}
-      <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-8">
-        {/* Logo */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-black p-3 rounded-xl">
-            <ShoppingCart className="text-white w-7 h-7" />
+      <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-4 md:p-8">
+        {token && (
+          <p
+            className="text-gray-500 text-sm mb-4 flex justify-start items-center"
+            onClick={() => (
+              setUserDetail({ email: "", password: "" }),
+              setToken("")
+            )}
+          >
+            <ArrowLeft /> Back{" "}
+          </p>
+        )}
+        <div className="flex justify-center mb-2">
+          <div className="rounded-xl">
+            {/* <ShoppingCart className="text-white w-7 h-7" /> */}
+            <img src="./logo.png" />
           </div>
         </div>
-
         <h1 className="text-2xl font-bold text-center text-black">
           Welcome Back
         </h1>
         <p className="text-center text-gray-500 text-sm mb-8">
-          Login to continue
+          Login to continue Dashboard
         </p>
-
-        {/* ================= FORM ================= */}
         {!token ? (
           <div className="space-y-5">
-            {/* Username */}
             <InputField
-              label="Username"
-              placeholder="Enter your username"
+              label="Email"
+              placeholder="Enter your email"
               icon={<Mail size={18} />}
-              value={userDetail.username}
-              error={submitted && !userDetail.username}
+              value={userDetail.email}
+              error={submitted && !userDetail.email}
               onChange={(e) =>
-                setUserDetail({ ...userDetail, username: e.target.value })
+                setUserDetail({ ...userDetail, email: e.target.value })
               }
             />
 
-            {/* Password */}
             <InputField
               label="Password"
               type={showPass ? "text" : "password"}
@@ -185,16 +190,13 @@ export default function Login(props) {
             />
           </div>
         )}
-
         <p className="text-center text-xs text-gray-400 mt-8">
-          © 2025. All rights reserved.
+          © 2025. Tobaline All rights reserved.
         </p>
       </div>
     </div>
   );
 }
-
-/* ================= REUSABLE COMPONENTS ================= */
 
 const InputField = ({
   label,
@@ -215,7 +217,7 @@ const InputField = ({
         value={value}
         onChange={onChange}
         className={`w-full pl-10 pr-10 py-3 rounded-xl border text-black focus:outline-none ${
-          error ? "border-red-500 bg-red-50" : "border-gray-300"
+          error ? "border-gray-500 bg-red-50" : "border-gray-300"
         }`}
         placeholder={placeholder}
       />

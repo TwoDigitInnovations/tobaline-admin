@@ -852,7 +852,7 @@ function Products(props) {
                                     <DialogActions className="!p-0 !flex !justify-center !items-center">
                                       <div className="!flex !justify-center !items-center px-[24px] pb-[24px] w-full gap-3">
                                         <button
-                                          className="bg-[#127300] h-[45px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
+                                          className="bg-black h-[45px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
                                           onClick={() => {
                                             setvarients(
                                               produce((draft) => {
@@ -877,7 +877,7 @@ function Products(props) {
                                           Ok
                                         </button>
                                         <button
-                                          className="bg-[#127300] h-[45px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
+                                          className="bg-black h-[45px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
                                           onClick={handleClose}
                                         >
                                           Cancel
@@ -996,7 +996,7 @@ function Products(props) {
 
                       {selectedCategory && (
                         <p
-                          className="bg-[#127300] mt-2 flex justify-center items-center cursor-pointer h-[40px] w-40 rounded-[10px] NunitoSans text-white font-normal text-base"
+                          className="bg-black mt-2 flex justify-center items-center cursor-pointer h-[40px] w-40 rounded-[10px] NunitoSans text-white font-normal text-base"
                           onClick={() => {
                             const newAttrGroup = {
                               attributes: productsData?.Attribute?.map(attr => ({
@@ -1087,7 +1087,7 @@ function Products(props) {
                                 </button>
                                 <button
                                   type="button"
-                                  className="px-4 py-2 bg-[#127300] text-white rounded"
+                                  className="px-4 py-2 bg-black text-white rounded"
                                   onClick={() => handleCropConfirm(i)}
                                 >
                                   Confirm Crop
@@ -1104,7 +1104,7 @@ function Products(props) {
                             Please Upload image in 500 × 500 size for better UI experience
                           </p>
                           <p
-                            className="text-white bg-[#127300] rounded-[10px] text-center text-md py-2 w-36 cursor-pointer"
+                            className="text-white bg-black rounded-[10px] text-center text-md py-2 w-36 cursor-pointer"
                             onClick={() => {
                               if (!singleImgs[i]) {
                                 props.toaster({
@@ -1154,7 +1154,7 @@ function Products(props) {
 
               <div className="w-full md:mt-5 mt-5 flex justify-end mb-5 gap-2">
                 <p
-                  className="bg-[#127300] flex justify-center items-center cursor-pointer md:h-[45px] h-[40px] md:w-[177px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
+                  className="bg-black flex justify-center items-center cursor-pointer md:h-[45px] h-[40px] md:w-[177px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
                   onClick={() => {
                     const newVariant = {
                       color: "",
@@ -1184,7 +1184,7 @@ function Products(props) {
 
             <div className="flex justify-center items-center md:mt-10 mt-5 gap-5">
               <button
-                className="bg-[#127300] md:h-[45px] h-[40px] w-[177px] rounded-[12px] NunitoSans text-white font-normal text-base"
+                className="bg-black md:h-[45px] h-[40px] w-[177px] rounded-[12px] NunitoSans text-white font-normal text-base"
                 type="submit"
               >
                 {router.query.id ? "Update" : "Submit"}

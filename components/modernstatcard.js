@@ -16,7 +16,7 @@ const ModernStatsCard = ({ title, value, icon, gradient, change }) => {
             <p className="text-slate-600 text-sm font-semibold tracking-wide uppercase">{title}</p>
             <p className="text-3xl font-black text-slate-800 mt-2 leading-none flex-wrap">{value}</p>
           </div>
-          <div className={`p-3 rounded-2xl bg-[#FE4F01] text-white shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+          <div className={`p-3 rounded-2xl bg-black text-white shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
             {icon}
           </div>
         </div>

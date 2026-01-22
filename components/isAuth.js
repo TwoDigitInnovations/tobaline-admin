@@ -12,15 +12,15 @@ const isAuth = (Component) => {
 
       if (user && token) {
         const u = JSON.parse(user);
-        auth = u?.role === "Admin";
+        auth = u?.role === "ADMIN";
       }
     }
 
     useEffect(() => {
-      if (!auth) {
-        localStorage.clear();
-        router.replace("/login");
-      }
+      // if (!auth) {
+      //   localStorage.clear();
+      //   router.replace("/login");
+      // }
     }, []);
 
     return <Component {...props} />;

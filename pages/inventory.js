@@ -276,7 +276,7 @@ function Inventory(props) {
           <div className="">
             <div className="flex md:flex-row flex-col md:justify-between md:items-end gap-3">
               <input
-                className="bg-gray-100 text-black border border-gray-100 outline-none h-[40px] md:w-[435px] w-full px-5 rounded-[10px] text-custom-darkBlack font-semibold text-base"
+                className="bg-gray-100 text-black outline-none h-[40px] md:w-[435px] w-full px-5 border border-black rounded-[10px] text-black font-semibold text-base"
                 type="text"
                 placeholder="Search Products"
                 value={searchTerm}
@@ -284,7 +284,7 @@ function Inventory(props) {
               />
 
               <button
-                className="text-white bg-[#127300] px-5 py-2.5 rounded cursor-pointer hover:bg-[#0f5f00] transition-colors"
+                className="text-white bg-black px-5 py-2.5 rounded cursor-pointer hover:bg-[#0f5f00] transition-colors"
                 onClick={() => router.push("/add-product")}
               >
                 Add Product

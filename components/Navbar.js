@@ -52,10 +52,10 @@ const Navbar = ({ setOpenTab, openTab }) => {
     <nav className="w-full bg-white z-20 sticky top-0 max-w-screen shadow-sm border-b border-gray-100">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+        
           <div className="flex items-center">
             <img 
-              className="h-10 w-auto object-contain" 
+              className="h-14 w-auto object-contain" 
               src="/logo.png" 
               alt="Logo"
               onClick={()=> router.push("/")}
@@ -70,7 +70,7 @@ const Navbar = ({ setOpenTab, openTab }) => {
                   // onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center space-x-3 bg-white hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors duration-200"
                 >
-                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#127300] flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-700 flex-shrink-0">
                     <img
                       src={user?.profile || "/office-man.png"} 
                       alt="User"
@@ -79,7 +79,7 @@ const Navbar = ({ setOpenTab, openTab }) => {
                     />
                   </div>
                   <div className="flex flex-col text-left">
-                    <p className="text-gray-800 font-medium text-sm">{user?.username}</p>
+                    <p className="text-gray-800 font-medium text-sm">{user?.name}</p>
                     <p className="text-gray-500 text-xs">{user?.role}</p>
                   </div>
                   {/* <ChevronDown size={16} className="text-gray-500 ml-1" /> */}
@@ -100,7 +100,7 @@ const Navbar = ({ setOpenTab, openTab }) => {
 
               <button 
                 onClick={handleLogout}
-                className="bg-[#127300] text-white rounded-lg px-4 py-2 flex items-center space-x-2 transition-colors duration-200"
+                className="bg-black text-white rounded-lg px-4 py-2 flex items-center space-x-2 transition-colors duration-200"
               >
                 <span>Sign Out</span>
                 <PiSignOutFill size={16} />
@@ -142,7 +142,7 @@ const Navbar = ({ setOpenTab, openTab }) => {
               
               <button 
                 onClick={handleLogout}
-                className="w-full bg-[#127300] hover:bg-orange-600 text-white rounded-lg py-2 px-4 flex items-center justify-center space-x-2 transition-colors duration-200"
+                className="w-full bg-black text-white rounded-lg py-2 px-4 flex items-center justify-center space-x-2 transition-colors duration-200"
               >
                 <span>Sign Out</span>
                 <PiSignOutFill size={16} />

@@ -44,7 +44,7 @@ function Orders(props) {
     getOrderBySeller(selctDate, selectedPikcupOption, page, orderId);
   };
 
-  const BRAND_COLOR = "#127300";
+  const BRAND_COLOR = "#000";
 
   const closeDrawer = async () => {
     setOpenCart(false);
@@ -340,12 +340,12 @@ function Orders(props) {
             <div className="w-full h-full overflow-y-scroll scrollbar-hide overflow-scroll md:pb-44 pb-32">
               <div className="sticky top-0 bg-white z-10 px-5 py-4 border-b border-gray-200 flex justify-between items-center">
                 <div className="flex items-center">
-                  <h2 className="text-[#127300] text-xl font-semibold">
+                  <h2 className="text-[#000] text-xl font-semibold">
                     Order Details
                   </h2>
                 </div>
                 <IoCloseCircleOutline
-                  className="text-[#127300] w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="text-[#000] w-6 h-6 cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={closeDrawer}
                 />
               </div>
@@ -442,7 +442,7 @@ function Orders(props) {
                       </div>
 
                       <div className="ml-auto">
-                        <p className="text-[#127300] font-semibold text-lg">
+                        <p className="text-[#000] font-semibold text-lg">
                           ${item?.price}
                         </p>
                       </div>
@@ -451,11 +451,11 @@ function Orders(props) {
                 ))}
               </div>
 
-              {/* Delivery Information */}
+            
               <div className="px-5 pt-6">
                 {/* Order Status */}
                 {cartData?.status === "Completed" && (
-                  <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+                  <div className="bg-green-50 border-l-4 border-black p-4 mb-4">
                     <div className="flex">
                       <div className="flex-shrink-0">
                         <svg
@@ -471,7 +471,7 @@ function Orders(props) {
                         </svg>
                       </div>
                       <div className="ml-3">
-                        <p className="text-sm text-green-700 font-medium">
+                        <p className="text-sm text-black font-medium">
                           Order has been delivered successfully
                         </p>
                       </div>
@@ -484,7 +484,7 @@ function Orders(props) {
                     <div className="flex">
                       <div className="flex-shrink-0">
                         <svg
-                          className="h-5 w-5 text-green-500"
+                          className="h-5 w-5 text-black"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                         >
@@ -496,7 +496,7 @@ function Orders(props) {
                         </svg>
                       </div>
                       <div className="ml-3">
-                        <p className="text-sm text-green-700 font-medium">
+                        <p className="text-sm text-black font-medium">
                           Order has been Return successfully
                         </p>
                       </div>
@@ -506,9 +506,8 @@ function Orders(props) {
               </div>
             </div>
 
-            {/* Total Section - Fixed at Bottom */}
             <div className="fixed bottom-0  right-0 bg-white px-2 py-2 border-t border-gray-200 md:w-[43vw] w-[380px]">
-              <button className="bg-[#127300] w-full py-4 rounded-lg text-white text-lg font-bold flex justify-center items-center">
+              <button className="bg-[#e5e5e5] w-full py-4 rounded-lg text-white text-lg font-bold flex justify-center items-center">
                 Total: ${cartData?.total}
               </button>
             </div>

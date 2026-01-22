@@ -253,7 +253,7 @@ function Categories(props) {
                     onChange={handleInput}
                   />
                   <button
-                    className="bg-[#28a745] px-5 font-semibold rounded-md md:py-3 py-2 text-white"
+                    className="bg-black px-5 font-semibold rounded-md md:py-3 py-2 text-white"
                     onClick={inputAttribute}
                   >
                     {"Add"}
@@ -282,7 +282,7 @@ function Categories(props) {
 
 
             <button
-              className="md:h-[45px] h-[40px] md:w-[324px] w-[300px] bg-[#28a745] rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
+              className="md:h-[45px] h-[40px] md:w-[324px] w-[300px] bg-black rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
               type="submit"
             >
               {data._id ? "Update Category" : "Add Now"}
@@ -291,7 +291,7 @@ function Categories(props) {
           {!showSubcategoryForm && (
             <div className="mb-5 mt-2">
               <button
-                className="md:h-[45px] h-[40px] md:w-[324px] w-[300px] bg-[#28a745] rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
+                className="md:h-[45px] h-[40px] md:w-[324px] w-[300px] bg-black rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
                 onClick={() => {
                   setHideCategory(false);
                   setShowSubcategoryForm(!showSubcategoryForm);
@@ -347,7 +347,7 @@ function Categories(props) {
                 onChange={handleInput}
               />
               <button
-                className="bg-[#28a745] px-5 font-semibold rounded-md md:py-3 py-2 text-white"
+                className="bg-black px-5 font-semibold rounded-md md:py-3 py-2 text-white"
                 onClick={inputAttribute}
               >
                 {"Add"}
@@ -374,14 +374,14 @@ function Categories(props) {
           </div>
 
           <button
-            className="md:h-[45px] h-[40px] md:w-[324px] w-full bg-[#28a745] rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
+            className="md:h-[45px] h-[40px] md:w-[324px] w-full bg-black rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold"
             type="submit"
           >
             {subData._id ? "Update Subcategory" : "Add Subcategory"}
           </button>
           <button
             type="button"
-            className="md:h-[45px] h-[40px] md:w-[324px]  w-full bg-[#28a745] rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold mt-3"
+            className="md:h-[45px] h-[40px] md:w-[324px]  w-full bg-black rounded-[10px] md:text-lg text-base text-white cursor-pointer font-semibold mt-3"
             onClick={handleCancelSubcategory}
           >
             Cancel

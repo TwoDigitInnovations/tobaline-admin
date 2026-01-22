@@ -36,7 +36,7 @@ function Queries(props) {
         itemsPerPage: 10,
     });
 
-    const primaryColor = '#127300'; // The specified orange color code
+    const primaryColor = '#000'; // The specified orange color code
 
     useEffect(() => {
         fetchQueries(selectedDate, currentPage);
@@ -61,7 +61,7 @@ function Queries(props) {
         props.loader(true);
 
         try {
-            const res = await Api("post", `getContactUs?page=${page}&limit=${limit}`, data, router);
+            const res = await Api("post", `contactus/getContactUs?page=${page}&limit=${limit}`, data, router);
 
             props.loader(false);
             setIsLoading(false);

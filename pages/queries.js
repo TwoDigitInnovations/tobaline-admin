@@ -36,7 +36,7 @@ function Queries(props) {
         itemsPerPage: 10,
     });
 
-    const primaryColor = '#000'; // The specified orange color code
+    const primaryColor = '#000'; 
 
     useEffect(() => {
         fetchQueries(selectedDate, currentPage);
@@ -61,7 +61,7 @@ function Queries(props) {
         props.loader(true);
 
         try {
-            const res = await Api("post", `contactus/getContactUs?page=${page}&limit=${limit}`, data, router);
+            const res = await Api("post", `contactus/getAllContactUs?page=${page}&limit=${limit}`, data, router);
 
             props.loader(false);
             setIsLoading(false);
@@ -104,7 +104,7 @@ function Queries(props) {
             id,
             status
         };
-        Api("post", "updateStatus", data, router)
+        Api("post", "contactus/updateStatus", data, router)
             .then((res) => {
                 props.loader(false);
                 if (res?.status === true) {
@@ -172,15 +172,15 @@ function Queries(props) {
     const renderActions = ({ row }) => (
         <div className="flex items-center justify-center">
             <button
-                className="flex items-center px-4 py-2 bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all"
+                className="flex bg-black text-white items-center px-4 py-2 bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all"
                 style={{ backgroundColor: `${primaryColor}20` }}
                 onClick={() => {
                     setViewPopup(true);
                     setPopupData(row.original);
                 }}
             >
-                <Eye size={18} style={{ color: primaryColor }} className="mr-2" />
-                <span style={{ color: primaryColor }} className="font-medium cursor-pointer">View</span>
+                <Eye size={18}  className="mr-2" />
+                <span className="font-medium cursor-pointer">View</span>
             </button>
         </div>
     );
@@ -225,12 +225,12 @@ function Queries(props) {
     );
 
     return (
-        <section className="w-full h-full bg-gray-50 p-6 overflow-y-scroll   scrollbar-hide overflow-scroll pb-28">
-            <div className="flex justify-between items-center mb-6">
+        <section className="w-full h-full bg-gray-50 p-4 md:p-6 overflow-y-scroll   scrollbar-hide overflow-scroll pb-28">
+            <div className="flex justify-between items-center mb-3 md:mb-6">
                 <h1 className="text-gray-900 font-bold text-3xl">Customer Queries</h1>
             </div>
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 mb-6 overflow-hidden">
-                <div className="p-6">
+                <div className="p-4 md:p-6">
                     <div className="flex items-center mb-4">
                         <Filter size={20} className="mr-2 text-gray-500" />
                         <h2 className="text-lg font-semibold text-gray-800">Search & Filter</h2>

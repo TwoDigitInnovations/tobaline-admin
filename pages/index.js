@@ -69,15 +69,15 @@ function Home(props) {
     },
   ]);
 
-  // useEffect(() => {
-  //   TopSoldProduct();
-  //   dashboarddetails();
-  //   getLowStockProduct();
-  // }, []);
+  useEffect(() => {
+    TopSoldProduct();
+    dashboarddetails();
+    getLowStockProduct();
+  }, []);
 
   const dashboarddetails = async () => {
     props.loader(true);
-    Api("get", "dashboarddetails", "", router).then(
+    Api("get", "product/dashboarddetails", "", router).then(
       (res) => {
         console.log("res================>", res);
         props.loader(false);
@@ -100,7 +100,7 @@ function Home(props) {
   useEffect(() => {
     const getMonthlySales = async () => {
       props.loader(true);
-      Api("get", `getMonthlySales?year=${selectedYear}`, "", router).then(
+      Api("get", `product/getMonthlySales?year=${selectedYear}`, "", router).then(
         (res) => {
           console.log("res================>", res);
           props.loader(false);
@@ -119,14 +119,14 @@ function Home(props) {
         }
       );
     };
-    // getMonthlySales();
+    getMonthlySales();
   }, [selectedYear]);
 
   const TopSoldProduct = (page = 1, limit = 8) => {
     props.loader(true);
     Api(
       "get",
-      `getTopSoldProduct?page=${page}&limit=${limit}`,
+      `product/getTopSoldProduct?page=${page}&limit=${limit}`,
       null,
       router
     ).then(
@@ -162,7 +162,7 @@ function Home(props) {
     props.loader(true);
     Api(
       "get",
-      `getLowStockProduct?page=${page}&limit=${limit}`,
+      `product/getLowStockProduct?page=${page}&limit=${limit}`,
       null,
       router
     ).then(

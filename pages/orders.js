@@ -12,7 +12,6 @@ import {
   IoCloseCircleOutline,
 } from "react-icons/io5";
 import { userContext } from "./_app";
-
 import {
   Search,
   Filter,
@@ -83,7 +82,7 @@ function Orders(props) {
 
     Api(
       "post",
-      `getOrderBySeller?page=${page}&limit=${limit}`,
+      `product/getOrderBySeller?page=${page}&limit=${limit}`,
       data,
       router
     ).then(
@@ -253,7 +252,7 @@ function Orders(props) {
       </div>
       <section
         className="px-5 pt-5 md:pb-32 bg-white h-full rounded-[12px] 
-            overflow-y-scroll   scrollbar-hide overflow-scroll pb-28 md:mt-5 mt-5"
+            overflow-y-scroll   scrollbar-hide overflow-scroll pb-28 md:mt-5 mt-0"
       >
         <div className="bg-white shadow-sm border border-gray-300 rounded-lg p-4 w-full">
           <div className="flex items-center mb-4">

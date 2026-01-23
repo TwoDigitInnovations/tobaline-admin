@@ -17,8 +17,6 @@ function Inventory(props) {
   const [selectedNewSeller, setSelectedNewSeller] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [value, setValue] = useState("");
   const [themeData, setThemeData] = useState([]);
 
   const [pagination, setPagination] = useState({
@@ -34,7 +32,7 @@ function Inventory(props) {
   const getProduct = async (page = 1, limit = 10) => {
     props.loader(true);
 
-    let url = `getProduct?page=${page}&limit=${limit}`;
+    let url = `product/getProduct?page=${page}&limit=${limit}`;
 
     Api("get", url, router).then(
       (res) => {
@@ -141,7 +139,7 @@ function Inventory(props) {
           <div
             key={i}
             className="text-base font-normal rounded-full h-5 w-5 border border-black"
-            style={{ background: item?.color || "#ccc" }}
+            style={{ background: item?.color }}
             title={item?.colorName || "Color"}
           ></div>
         ))}
@@ -229,7 +227,7 @@ function Inventory(props) {
         };
 
         props.loader(true);
-        Api("delete", `deleteProduct/${_id}`, data, router).then(
+        Api("delete", `product/deleteProduct/${_id}`, data, router).then(
           (res) => {
             console.log("res================>", res.data?.message);
             props.loader(false);

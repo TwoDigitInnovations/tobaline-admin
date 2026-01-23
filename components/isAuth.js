@@ -17,10 +17,10 @@ const isAuth = (Component) => {
     }
 
     useEffect(() => {
-      // if (!auth) {
-      //   localStorage.clear();
-      //   router.replace("/login");
-      // }
+      if (!auth) {
+        localStorage.clear();
+        router.replace("/login");
+      }
     }, []);
 
     return <Component {...props} />;

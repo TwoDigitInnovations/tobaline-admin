@@ -36,9 +36,9 @@ export default function App({ Component, pageProps }) {
       setUser(JSON.parse(user));
       // router.push("/");
     } else {
-      // if (router.route !== "/login") {
-      //   router.push("/login");
-      // }
+      if (router.route !== "/login") {
+        router.push("/login");
+      }
     }
   };
 

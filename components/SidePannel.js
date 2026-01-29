@@ -12,6 +12,7 @@ import { PiSignOutFill } from "react-icons/pi";
 import Swal from "sweetalert2";
 import { MdRateReview } from "react-icons/md";
 import { User } from "lucide-react";
+import { GiClothes } from "react-icons/gi";
 
 const SidePannel = ({ setOpenTab, openTab }) => {
   const [user, setUser] = useContext(userContext);
@@ -54,7 +55,14 @@ const SidePannel = ({ setOpenTab, openTab }) => {
       title: "Categories",
       img: <BiSolidCategory className="text-3xl" />,
       access: ["ADMIN"],
+    },{
+      href: "/ClothType",
+      title: "Cloth Type",
+      img: <GiClothes className="text-3xl" />,
+      access: ["ADMIN"],
     },
+
+
     {
       href: "/settings",
       title: "Settings",

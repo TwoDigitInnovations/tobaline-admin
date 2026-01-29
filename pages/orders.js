@@ -379,17 +379,17 @@ function Orders(props) {
                 {cartData?.productDetail?.map((item, i) => (
                   <div
                     key={i}
-                    className="border-b border-gray-100 py-4 cursor-pointer hover:bg-gray-50 transition-colors rounded-lg"
+                    className="border-b border-gray-100 py-2 shadow-md cursor-pointer hover:bg-gray-50 transition-colors rounded-lg"
                     onClick={() => {
                       router.push(
                         `/orders-details/${cartData?._id}?product_id=${item?._id}`
                       );
                     }}
                   >
-                    <div className="flex items-center justify-center p-1 bg-white shadow-md rounded-lg">
+                    <div className="flex items-center justify-center p-1 bg-white  rounded-lg">
                       <div className=" bg-gray-50 rounded-lg ">
                         <img
-                          className="w-[80px] h-[140px] object-contain"
+                          className="w-[80px] h-full object-contain"
                           src={item?.image[0]}
                           alt={item?.product?.name}
                         />
@@ -506,7 +506,7 @@ function Orders(props) {
             </div>
 
             <div className="fixed bottom-0  right-0 bg-white px-2 py-2 border-t border-gray-200 md:w-[43vw] w-[380px]">
-              <button className="bg-[#e5e5e5] w-full py-4 rounded-lg text-white text-lg font-bold flex justify-center items-center">
+              <button className="bg-black w-full py-4 rounded-lg text-white text-lg font-bold flex justify-center items-center">
                 Total: ${cartData?.total}
               </button>
             </div>

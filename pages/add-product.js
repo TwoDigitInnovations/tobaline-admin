@@ -72,6 +72,8 @@ function Products(props) {
   const [productsData, setProductsData] = useState({
     category: "",
     categoryName: "",
+    clothType: "",
+    clothTypeName: "",
     gender: "",
     name: "",
     short_description: "",
@@ -90,6 +92,7 @@ function Products(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [color, setColor] = useColor("#000000");
   const [openPopup, setOpenPopup] = useState(false);
+  const [ClothTypes, setClothTypes] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const forms = useRef();
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -99,6 +102,7 @@ function Products(props) {
 
   useEffect(() => {
     getCategory();
+    getAllClothTypes();
   }, []);
 
   useEffect(() => {
@@ -180,6 +184,18 @@ function Products(props) {
     );
   };
 
+  const getAllClothTypes = async () => {
+    props.loader(true);
+    try {
+      const res = await Api("get", "clothtype/list", "", router);
+      setClothTypes(res.data);
+    } catch (err) {
+      props.toaster({ type: "error", message: err?.message });
+    } finally {
+      props.loader(false);
+    }
+  };
+
   const getProductById = async (id) => {
     if (!id) {
       console.error("Invalid product ID");
@@ -195,6 +211,8 @@ function Products(props) {
           setProductsData({
             category: product.category || "",
             categoryName: product.categoryName || "",
+            clothType: product.clothType || "",
+            clothTypeName: product.clothTypeName || "",
             name: product.name || "",
             gender: product.gender || "",
             short_description: product.short_description || "",
@@ -251,14 +269,14 @@ function Products(props) {
     }
   }, [productsData?.category, categoryData]);
 
-  const createProduct = async (e) => {
+  const submitProduct = async (e) => {
     e.preventDefault();
 
-    const sumWithInitial = varients.reduce(
-      (accumulator, currentValue) =>
-        accumulator +
-        currentValue.selected.reduce(
-          (total, currentVal) => total + (Number(currentVal.qty) || 0),
+    const totalPieces = varients.reduce(
+      (acc, curr) =>
+        acc +
+        curr.selected.reduce(
+          (total, item) => total + (Number(item.qty) || 0),
           0,
         ),
       0,
@@ -267,80 +285,20 @@ function Products(props) {
     const data = {
       ...productsData,
       varients,
-      pieces: sumWithInitial,
+      pieces: totalPieces,
     };
 
-    // props.loader(true);
+    const isUpdate = Boolean(router.query.id);
 
-    console.log("data================>", data);
+    if (isUpdate) {
+      data.id = router.query.id;
+    }
 
-    Api("post", "product/createProduct", data, router).then(
-      (res) => {
-        props.loader(false);
-        console.log("res================>", res);
-        if (res.status) {
-          setProductsData({
-            category: "",
-            categoryName: "",
-            name: "",
-            price: "",
-            gender: "",
-            short_description: "",
-            origin: "",
-            long_description: "",
-            offer: "",
-          });
+    const apiUrl = isUpdate ? "product/updateProduct" : "product/createProduct";
 
-          setvarients([
-            {
-              color: "",
-              image: [],
-              selected: [],
-            },
-          ]);
-
-          setSelectedCategory("");
-
-          router.push("/inventory");
-          props.toaster({ type: "success", message: res.data?.message });
-        } else {
-          props.toaster({ type: "error", message: res?.data?.message });
-        }
-      },
-      (err) => {
-        props.loader(false);
-        console.log(err);
-        props.toaster({ type: "error", message: err?.message });
-      },
-    );
-  };
-
-  console.log(varients);
-  
-  const updateProduct = async (e) => {
-    e.preventDefault();
-
-    const sumWithInitial = varients.reduce(
-      (accumulator, currentValue) =>
-        accumulator +
-        currentValue.selected.reduce(
-          (total, currentVal) => total + Number(currentVal.qty),
-          0,
-        ),
-      0,
-    );
-
-    const data = {
-      ...productsData,
-      varients,
-      pieces: sumWithInitial,
-      id: router.query.id,
-    };
-
-    console.log("data called update Api", data);
     props.loader(true);
 
-    Api("post", "product/updateProduct", data, router).then(
+    Api("post", apiUrl, data, router).then(
       (res) => {
         props.loader(false);
 
@@ -368,15 +326,24 @@ function Products(props) {
           setSelectedCategory("");
 
           router.push("/inventory");
-          props.toaster({ type: "success", message: res.data?.message });
+
+          props.toaster({
+            type: "success",
+            message: res.data?.message,
+          });
         } else {
-          props.toaster({ type: "error", message: res?.data?.message });
+          props.toaster({
+            type: "error",
+            message: res?.data?.message,
+          });
         }
       },
       (err) => {
         props.loader(false);
-        console.log(err);
-        props.toaster({ type: "error", message: err?.message });
+        props.toaster({
+          type: "error",
+          message: err?.message,
+        });
       },
     );
   };
@@ -506,6 +473,8 @@ function Products(props) {
     }));
   };
 
+  console.log(productsData);
+  
   return (
     <section className=" w-full h-full bg-transparent !p-4 !md:p-5 ">
       <div className=" h-full">
@@ -517,7 +486,7 @@ function Products(props) {
           <form
             ref={forms}
             className="w-full border-b-4 border-gray-400 pb-5"
-            onSubmit={router.query.id ? updateProduct : createProduct}
+            onSubmit={submitProduct}
           >
             <div className="grid md:grid-cols-2 grid-cols-1 w-full gap-5">
               <div className="flex flex-col justify-start items-start mb-2">
@@ -543,6 +512,43 @@ function Products(props) {
                 </div>
               </div>
 
+              <div className="flex flex-col justify-start items-start mb-2">
+                <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
+                  Cloth Type <span className="text-red-500">*</span>
+                </p>
+
+                <div className="w-full bg-custom-light border border-gray-300 rounded">
+                  <select
+                    className="w-full md:h-[42px] h-[40px] bg-custom-light outline-none font-normal text-sm text-black NunitoSans"
+                    value={productsData?.clothType || ""}
+                    onChange={(e) => {
+                      const selectedId = e.target.value;
+                      const selectedType = ClothTypes.find(
+                        (type) => type._id === selectedId,
+                      );
+console.log(selectedType);
+
+                      setProductsData((prev) => ({
+                        ...prev,
+                        clothType: selectedId,
+                        clothTypeName: selectedType?.name || "",
+                      }));
+                    }}
+                    required
+                  >
+                    <option value="" disabled>
+                      Select Cloth Types
+                    </option>
+
+                    {ClothTypes.map((type) => (
+                      <option key={type._id} value={type._id}>
+                        {type.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div className="flex flex-col justify-start items-start">
                 <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
                   Product Name
@@ -560,7 +566,7 @@ function Products(props) {
 
               <div className="flex flex-col justify-start items-start">
                 <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
-                  Product Name
+                  Manufacturing Place
                 </p>
                 <input
                   type="text"

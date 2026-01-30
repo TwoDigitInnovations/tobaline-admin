@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// export const ConstantsUrl = "http://localhost:8001/";
-export const ConstantsUrl = "https://api.tobaline.com/";
+export const ConstantsUrl = "http://localhost:8001/";
+// export const ConstantsUrl = "https://api.tobaline.com/";
 
 
 function handleAuthError(err, router) {

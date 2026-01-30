@@ -78,6 +78,8 @@ function Products(props) {
     name: "",
     short_description: "",
     origin: "",
+    metadescription: "",
+    metatitle: "",
     long_description: "",
   });
 
@@ -217,6 +219,8 @@ function Products(props) {
             gender: product.gender || "",
             short_description: product.short_description || "",
             origin: product.origin || "",
+            metadescription: product.metadescription || "",
+            metatitle: product.metatitle || "",
             long_description: product.long_description || "",
             offer: product.offer || "",
             Attribute: product.Attribute || [],
@@ -311,6 +315,8 @@ function Products(props) {
             gender: "",
             short_description: "",
             origin: "",
+            metadescription: "",
+            metatitle: "",
             long_description: "",
             offer: "",
           });
@@ -474,7 +480,7 @@ function Products(props) {
   };
 
   console.log(productsData);
-  
+
   return (
     <section className=" w-full h-full bg-transparent !p-4 !md:p-5 ">
       <div className=" h-full">
@@ -526,7 +532,7 @@ function Products(props) {
                       const selectedType = ClothTypes.find(
                         (type) => type._id === selectedId,
                       );
-console.log(selectedType);
+                      console.log(selectedType);
 
                       setProductsData((prev) => ({
                         ...prev,
@@ -578,6 +584,35 @@ console.log(selectedType);
                   required
                 />
               </div>
+              <div className="flex flex-col justify-start items-start">
+                <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
+                  Meta Title
+                </p>
+                <input
+                  type="text"
+                  className="w-full md:h-[42px] h-[40px] bg-custom-light border border-gray-300 px-3 rounded outline-none font-normal text-sm text-black NunitoSans"
+                  placeholder="Enter Meta Title"
+                  value={productsData.metatitle}
+                  name="metatitle"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="flex flex-col justify-start items-start">
+                <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
+                  Meta Description
+                </p>
+                <input
+                  type="text"
+                  className="w-full md:h-[42px] h-[40px] bg-custom-light border border-gray-300 px-3 rounded outline-none font-normal text-sm text-black NunitoSans"
+                  placeholder="Enter Meta Description"
+                  value={productsData.metadescription}
+                  name="metadescription"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+             
 
               <div className="flex flex-col justify-start items-start">
                 <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">

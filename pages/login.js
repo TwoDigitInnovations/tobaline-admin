@@ -43,7 +43,7 @@ export default function Login(props) {
       const res = await Api(
         "post",
         "auth/loginwithOtp",
-        { ...userDetail, ipConfing: userInfo, action: "sendOtpForLogin" },
+        { ...userDetail, ipConfing: userInfo, action: "loginwithOtp" },
         router,
       );
 
@@ -72,7 +72,7 @@ export default function Login(props) {
       token,
       otp,
       ipConfing: userInfo,
-      action: "verifyOTPForLogin",
+      action: "verify-otp-login",
     };
     console.log(data);
 
@@ -80,7 +80,7 @@ export default function Login(props) {
       setLoading(true);
       props.loader(true);
 
-      const res = await Api("post", "auth/verifyOTPForLogin", data, router);
+      const res = await Api("post", "auth/verify-otp-login", data, router);
 
       props.loader(false);
       setLoading(false);

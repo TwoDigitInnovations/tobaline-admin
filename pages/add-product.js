@@ -409,7 +409,7 @@ function Products(props) {
 
     const fileSizeInMb = croppedBlob.size / (1024 * 1024);
     console.log(fileSizeInMb);
-    
+
     if (fileSizeInMb > 1) {
       props.toaster({
         type: "error",
@@ -612,7 +612,6 @@ function Products(props) {
                   required
                 />
               </div>
-             
 
               <div className="flex flex-col justify-start items-start">
                 <p className="text-gray-800 text-sm font-semibold NunitoSans pb-2">
@@ -746,7 +745,7 @@ function Products(props) {
                                     />
                                   </DialogContent>
                                   <DialogActions className="!p-0 !flex !justify-center !items-center">
-                                    <div className="!flex !justify-center !items-center px-[24px] pb-[24px] w-full gap-3">
+                                    <div className="!flex justify-center! items-center! px-[24px] pb-[24px] w-full gap-3">
                                       <button
                                         className="bg-black h-[45px] w-full rounded-[12px] NunitoSans text-white font-normal text-base"
                                         onClick={() => {
@@ -1018,9 +1017,11 @@ function Products(props) {
 
                       <div className="flex justify-between items-center mt-5">
                         <p className="text-gray-700">
-                          Please Upload image in 500 × 500 size for better UI
-                          experience
+                          Upload and crop your image, then click{" "}
+                          <span className="font-semibold">Add</span>.
+                          Recommended size: 500 × 500 for best UI.
                         </p>
+
                         <p
                           className="text-white bg-black rounded-[10px] text-center text-md py-2 w-36 cursor-pointer"
                           onClick={() => {

@@ -63,12 +63,12 @@ const SidePannel = ({ setOpenTab, openTab }) => {
     },
 
 
-    {
-      href: "/settings",
-      title: "Settings",
-      img: <BiSolidCategory className="text-3xl" />,
-      access: ["ADMIN"],
-    },
+    // {
+    //   href: "/settings",
+    //   title: "Settings",
+    //   img: <BiSolidCategory className="text-3xl" />,
+    //   access: ["ADMIN"],
+    // },
   ];
 
 

@@ -408,10 +408,12 @@ function Products(props) {
     const croppedBlob = await getCroppedImg(imageElement, crop);
 
     const fileSizeInMb = croppedBlob.size / (1024 * 1024);
+    console.log(fileSizeInMb);
+    
     if (fileSizeInMb > 1) {
       props.toaster({
         type: "error",
-        message: "Too large file. Please upload a smaller image",
+        message: "Too large file. Please upload a smaller image under 1 MB",
       });
       return;
     }
@@ -478,8 +480,6 @@ function Products(props) {
       [name]: value,
     }));
   };
-
-  console.log(productsData);
 
   return (
     <section className=" w-full h-full bg-transparent !p-4 !md:p-5 ">

@@ -216,9 +216,9 @@ function Inventory(props) {
     Swal.fire({
       text: "Are you sure? You want to proceed with the delete?",
       showCancelButton: true,
-      cancelButtonColor: "#127300",
+      cancelButtonColor: "#000",
       confirmButtonText: "Delete",
-      confirmButtonColor: "#127300",
+      confirmButtonColor: "#000",
       width: "380px",
     }).then(function (result) {
       if (result.isConfirmed) {

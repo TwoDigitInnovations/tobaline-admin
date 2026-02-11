@@ -91,6 +91,7 @@ function Categories(props) {
       text: "You want to proceed with the deletion?",
       showCancelButton: true,
       confirmButtonText: "Delete",
+      confirmButtonColor:"#000"
     });
     const data = {
       id: _id,

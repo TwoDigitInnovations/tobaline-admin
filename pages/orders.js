@@ -8,16 +8,9 @@ import { Api } from "../services/service";
 import { useRouter } from "next/router";
 import moment from "moment";
 import { Drawer } from "@mui/material";
-import {
-  IoCloseCircleOutline,
-} from "react-icons/io5";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { userContext } from "./_app";
-import {
-  Search,
-  Filter,
-  Calendar,
-  XCircle,
-} from "lucide-react";
+import { Search, Filter, Calendar, XCircle } from "lucide-react";
 
 function Orders(props) {
   const router = useRouter();
@@ -63,11 +56,7 @@ function Orders(props) {
     setPickupdate("");
   };
 
-  const getOrderBySeller = async (
-    selctDate,
-    page = 1,
-    limit = 10
-  ) => {
+  const getOrderBySeller = async (selctDate, page = 1, limit = 10) => {
     const data = {};
 
     if (selctDate) {
@@ -84,7 +73,7 @@ function Orders(props) {
       "post",
       `product/getOrderBySeller?page=${page}&limit=${limit}`,
       data,
-      router
+      router,
     ).then(
       (res) => {
         props.loader(false);
@@ -98,7 +87,7 @@ function Orders(props) {
         props.loader(false);
         console.log(err);
         props.toaster({ type: "error", message: err?.message });
-      }
+      },
     );
   };
 
@@ -236,14 +225,13 @@ function Orders(props) {
         Cell: info,
       },
     ],
-    []
+    [],
   );
 
   const formatDate = (date) => {
     if (!date || isNaN(new Date(date))) return "";
     return new Date(date).toISOString().split("T")[0];
   };
-
 
   return (
     <section className=" w-full h-full bg-transparent py-4 ">
@@ -380,11 +368,11 @@ function Orders(props) {
                   <div
                     key={i}
                     className="border-b border-gray-100 py-2 shadow-md cursor-pointer hover:bg-gray-50 transition-colors rounded-lg"
-                    onClick={() => {
-                      router.push(
-                        `/orders-details/${cartData?._id}?product_id=${item?._id}`
-                      );
-                    }}
+                    // onClick={() => {
+                    //   router.push(
+                    //     `/orders-details/${cartData?._id}?product_id=${item?._id}`,
+                    //   );
+                    // }}
                   >
                     <div className="flex items-center justify-center p-1 bg-white  rounded-lg">
                       <div className=" bg-gray-50 rounded-lg ">
@@ -420,19 +408,20 @@ function Orders(props) {
                                 </span>
                               </div>
                             )}
-                            {item?.attribute &&
-                              Object.entries(item.attribute)
+                            {Array.isArray(item?.attribute) &&
+                              item.attribute
                                 .filter(
-                                  ([key]) => key.toLowerCase() !== "color"
+                                  (attr) =>
+                                    attr.label.toLowerCase() !== "color",
                                 )
-                                .map(([label, value], index) => (
+                                .map((attr, index) => (
                                   <div
                                     key={index}
                                     className="text-gray-700 text-sm mb-1 font-medium"
                                   >
-                                    {label}:{" "}
+                                    {attr.label}:{" "}
                                     <span className="text-gray-700 text-sm">
-                                      {value || "Not found"}
+                                      {attr.value || "Not found"}
                                     </span>
                                   </div>
                                 ))}
@@ -450,7 +439,6 @@ function Orders(props) {
                 ))}
               </div>
 
-            
               <div className="px-5 pt-6">
                 {/* Order Status */}
                 {cartData?.status === "Completed" && (

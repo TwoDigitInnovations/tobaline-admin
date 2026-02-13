@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Judson:wght@400;700&display=swap");
+
 @import "tailwindcss";
 
 :root {
@@ -27,7 +29,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Judson", serif;
 }
 
 .bg-custom-black {

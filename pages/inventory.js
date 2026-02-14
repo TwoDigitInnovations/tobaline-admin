@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { userContext } from "./_app";
 import isAuth from "../components/isAuth";
+import constant from "../services/constant";
 
 function Inventory(props) {
   const router = useRouter();
@@ -70,7 +71,7 @@ function Inventory(props) {
           row.original.varients &&
           row.original.varients.length > 0 && (
             <img
-              className="md:h-[116px] md:w-[126px] h-20 w-40 object-contain  rounded-md"
+              className="md:h-[116px] md:w-[126px] h-20 w-40 object-contain rounded-md"
               src={row.original.varients[0].image[0]}
               alt="Product"
               onError={(e) => {
@@ -109,7 +110,7 @@ function Inventory(props) {
 
     return (
       <div className="p-4 flex flex-col items-center justify-center">
-        <p className="text-black text-base font-normal">${formattedPrice}</p>
+        <p className="text-black text-base font-normal">{constant.currency} {formattedPrice}</p>
       </div>
     );
   };
@@ -263,14 +264,14 @@ function Inventory(props) {
 
 
   return (
-    <div className="w-full h-full bg-transparent py-5 md:px-5 ">
+    <div className="w-full h-full bg-transparent py-5 md:px-0 ">
       <div className="h-full">
         <div className="flex justify-between items-center px-4">
           <p className="text-black font-bold md:text-[32px] text-2xl">
             Inventory
           </p>
         </div>
-        <div className="bg-white pt-5 md:pb-32 px-5 rounded-[12px] h-full overflow-y-scroll scrollbar-hide overflow-scroll pb-28 md:mt-5 mt-5">
+        <div className="bg-white md:pb-32 px-5 rounded-[12px] h-full overflow-y-scroll scrollbar-hide overflow-scroll pb-28 md:mt-5 mt-5">
           <div className="">
             <div className="flex md:flex-row flex-col md:justify-between md:items-end gap-3">
               <input
@@ -282,14 +283,14 @@ function Inventory(props) {
               />
 
               <button
-                className="text-white bg-black px-5 py-2.5 rounded cursor-pointer hover:bg-[#0f5f00] transition-colors"
+                className="text-white bg-black px-5 py-2.5 rounded cursor-pointer transition-colors"
                 onClick={() => router.push("/add-product")}
               >
                 Add Product
               </button>
             </div>
 
-            <div className="mt-5">
+            <div className="">
               <Table
                 columns={columns}
                 data={filteredProducts}

@@ -34,6 +34,7 @@ import {
 import isAuth from '../components/isAuth';
 import { userContext } from './_app';
 import ModernStatsCard from '../components/modernstatcard';
+import constant from '../services/constant';
 
 ChartJS.register(
   CategoryScale,
@@ -237,7 +238,7 @@ function Home(props) {
           />
           <ModernStatsCard
             title="Revenue"
-            value={`$${AllData?.totalTransactionAmount || "89,420"}`}
+            value={`${constant.currency}${AllData?.totalTransactionAmount || "89,420"}`}
             icon={<DollarSign size={28} />}
             accentColor="#000"
 

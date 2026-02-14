@@ -82,12 +82,14 @@ function ClothType(props) {
   return (
     <section className="w-full h-full md:pt-6 pt-4 px-4 md:px-6 overflow-y-scroll scrollbar-hide overflow-scroll pb-28 bg-gradient-to-br from-slate-50 to-gray-100 min-h-screen">
       {/* Header */}
-      <div className="mb-4 md:mb-8">
-        <h1 className="font-bold text-slate-800 md:text-[32px] text-2xl ">
-          ClothType Management
+      <div className="mb-4">
+        <h1 className="font-bold text-slate-800 md:text-[32px] text-2xl">
+          Cloth Type Management
         </h1>
-        <p className="text-slate-600 text-md">
-          Manage your ClothType portfolio with ease
+        <p className="text-gray-600 mt-1">
+          Note: This section is used to manage categories for all sustainable
+          products such as clothing, handmade jewellery, and other eco-friendly
+          items.
         </p>
       </div>
 
@@ -97,19 +99,19 @@ function ClothType(props) {
             <FiPlus className="text-white w-5 h-5" />
           </div>
           <h2 className="text-slate-800 font-semibold text-lg">
-            Add New ClothType
+            Add New Cloth Type
           </h2>
         </div>
 
         <form className="space-y-6" onSubmit={submitClothType}>
           <div>
             <label className="block text-slate-700 font-medium mb-2">
-              ClothType Name
+              Cloth Type Name
             </label>
             <input
               className="w-full bg-slate-50 border border-slate-200 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 h-12 rounded-xl px-4 text-slate-800 font-medium"
               type="text"
-              placeholder="Enter ClothType name"
+              placeholder="Enter Cloth Type name"
               value={data.name}
               onChange={(e) => setData({ ...data, name: e.target.value })}
               required
@@ -120,7 +122,7 @@ function ClothType(props) {
             className="w-full h-12 bg-black rounded-xl text-white font-semibold transition-all duration-200 shadow-lg shadow-indigo-200/50 hover:shadow-xl hover:shadow-indigo-300/50 transform hover:-translate-y-0.5 cursor-pointer"
             type="submit"
           >
-            {data._id ? "Update ClothType" : "Add ClothType"}
+            {data._id ? "Update Cloth Type" : "Add Cloth Type"}
           </button>
         </form>
       </div>
@@ -131,7 +133,7 @@ function ClothType(props) {
           <input
             className="w-full bg-slate-50 border border-slate-200 outline-none focus:border-green-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-200 h-12 pl-12 pr-4 rounded-xl text-slate-800 font-medium"
             type="text"
-            placeholder="Search ClothTypes..."
+            placeholder="Search Cloth Types..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -155,7 +157,7 @@ function ClothType(props) {
                       {item.name}
                     </p>
                     <p className="text-slate-500 text-sm">
-                      ClothType #{index + 1}
+                      Cloth Type #{index + 1}
                     </p>
                   </div>
                 </div>
@@ -192,12 +194,12 @@ function ClothType(props) {
             <FiSearch className="w-10 h-10 text-slate-400" />
           </div>
           <h3 className="text-slate-600 font-semibold text-lg mb-2">
-            No ClothTypes found
+            No Cloth Types found
           </h3>
           <p className="text-slate-500">
             {searchTerm
               ? "Try adjusting your search criteria"
-              : "Add your first ClothType to get started"}
+              : "Add your first Cloth Type to get started"}
           </p>
         </div>
       )}

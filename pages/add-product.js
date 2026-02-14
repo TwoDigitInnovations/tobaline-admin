@@ -16,6 +16,7 @@ import dynamic from "next/dynamic";
 import Compressor from "compressorjs";
 import ReactCrop, { Crop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import constant from "../services/constant";
 
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 
@@ -286,6 +287,13 @@ function Products(props) {
       0,
     );
 
+    if (!varients.image?.length) {
+      return props.toaster({
+        type: "error",
+        message: "Please upload an image",
+      });
+    }
+
     const data = {
       ...productsData,
       varients,
@@ -407,20 +415,21 @@ function Products(props) {
     const imageElement = document.querySelector("#crop-image");
     const croppedBlob = await getCroppedImg(imageElement, crop);
 
-    const fileSizeInMb = croppedBlob.size / (1024 * 1024);
-    console.log(fileSizeInMb);
-
-    if (fileSizeInMb > 1) {
-      props.toaster({
-        type: "error",
-        message: "Too large file. Please upload a smaller image under 1 MB",
-      });
-      return;
-    }
-
     new Compressor(croppedBlob, {
       quality: 0.6,
       success: (compressedResult) => {
+        const fileSizeInMb = compressedResult.size / (1024 * 1024);
+        console.log("Compressed Size:", fileSizeInMb);
+
+        if (fileSizeInMb > 2) {
+          props.toaster({
+            type: "error",
+            message:
+              "Image is still larger than 2MB after compression. Please choose a smaller image.",
+          });
+          return;
+        }
+
         const data = new FormData();
         data.append("file", compressedResult);
         props.loader(true);
@@ -695,12 +704,12 @@ function Products(props) {
                       {productsData?.Attribute?.some(
                         (attr) => attr.name.toLowerCase() === "color",
                       ) && (
-                        <div className="">
+                        <div className="w-full md:w-[400px] px-2 md:px-0">
                           <p className="text-gray-800 text-sm font-semibold NunitoSans pb-[15px] pl-[50px]">
                             Color
                           </p>
-                          <div className="flex justify-start items-center">
-                            <p className="text-gray-800 text-sm font-semibold w-[60px]">
+                          <div className="flex justify-start items-center w-full">
+                            <p className="text-gray-800 text-sm font-semibold">
                               S.no {i + 1}
                             </p>
                             <div className="relative w-full">
@@ -724,6 +733,7 @@ function Products(props) {
                                   setCurrentIndex(i);
                                 }}
                               ></p>
+
                               <Dialog
                                 open={openPopup}
                                 onClose={handleClose}
@@ -790,6 +800,9 @@ function Products(props) {
                               </Dialog>
                             </div>
                           </div>
+                          <p className="md:text-sm text-xs text-gray-600 mt-2 md:pl-[35px]">
+                            Click on the circle to choose a color
+                          </p>
                         </div>
                       )}
                     </div>
@@ -862,7 +875,7 @@ function Products(props) {
 
                           <div>
                             <p className="text-gray-800 font-semibold mb-1">
-                              Price
+                              Price ({constant.currency})
                             </p>
                             <input
                               type="number"
@@ -885,7 +898,7 @@ function Products(props) {
 
                           <div>
                             <p className="text-gray-800 font-semibold mb-1">
-                              Offer Price
+                              Offer Price ({constant.currency})
                             </p>
                             <input
                               type="number"
@@ -1019,7 +1032,10 @@ function Products(props) {
                         <p className="text-gray-700">
                           Upload and crop your image, then click{" "}
                           <span className="font-semibold">Add</span>.
-                          Recommended size: 500 × 500 for best UI.
+                          Recommended size: 500 × 500 for best UI. Please upload
+                          an image under 5 MB. It will be automatically
+                          compressed to under 2 MB for optimal performance. use
+                          Laptop or Desktop for better Uploading
                         </p>
 
                         <p
@@ -1092,14 +1108,14 @@ function Products(props) {
                     setSingleImgs((prev) => [...prev, ""]);
                   }}
                 >
-                  Add more
+                  Add More Varients
                 </p>
               </div>
             </div>
 
             <div className="flex justify-center items-center md:mt-10 mt-5 gap-5">
               <button
-                className="bg-black md:h-[45px] h-[40px] w-[177px] rounded-[12px] NunitoSans text-white font-normal text-base"
+                className="bg-black md:h-[45px] h-[40px] w-[177px] rounded-[12px]  text-white font-normal text-base"
                 type="submit"
               >
                 {router.query.id ? "Update" : "Submit"}

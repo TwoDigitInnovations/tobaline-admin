@@ -287,7 +287,11 @@ function Products(props) {
       0,
     );
 
-    if (!varients.image?.length) {
+    console.log(varients);
+    console.log(varients[0]?.image);
+    console.log(!varients[0]?.image[0]);
+
+    if (!varients[0].image || !varients[0]?.image[0]) {
       return props.toaster({
         type: "error",
         message: "Please upload an image",
@@ -1028,7 +1032,7 @@ function Products(props) {
                         </div>
                       )}
 
-                      <div className="flex justify-between items-center mt-5">
+                      <div className="flex md:flex-row flex-col justify-between items-center mt-5">
                         <p className="text-gray-700">
                           Upload and crop your image, then click{" "}
                           <span className="font-semibold">Add</span>.

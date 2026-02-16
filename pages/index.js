@@ -1,7 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Api } from '../services/service';
-import { Users, DollarSign, BarChart2, HelpCircle, TrendingUp, Package, ShoppingCart, AlertTriangle, Layers } from 'lucide-react';
+import { Api } from "../services/service";
+import {
+  Users,
+  DollarSign,
+  BarChart2,
+  HelpCircle,
+  TrendingUp,
+  Package,
+  ShoppingCart,
+  AlertTriangle,
+  Layers,
+} from "lucide-react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,13 +38,13 @@ import {
   Cell,
   Area,
   AreaChart,
-  Tooltip as RechartsTooltip
+  Tooltip as RechartsTooltip,
 } from "recharts";
 
-import isAuth from '../components/isAuth';
-import { userContext } from './_app';
-import ModernStatsCard from '../components/modernstatcard';
-import constant from '../services/constant';
+import isAuth from "../components/isAuth";
+import { userContext } from "./_app";
+import ModernStatsCard from "../components/modernstatcard";
+import constant from "../services/constant";
 
 ChartJS.register(
   CategoryScale,
@@ -45,7 +55,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   ArcElement,
-  Filler
+  Filler,
 );
 
 function Home(props) {
@@ -94,14 +104,19 @@ function Home(props) {
         console.log(err);
         props.toaster({ type: "error", message: err?.data?.message });
         props.toaster({ type: "error", message: err?.message });
-      }
+      },
     );
   };
 
   useEffect(() => {
     const getMonthlySales = async () => {
       props.loader(true);
-      Api("get", `product/getMonthlySales?year=${selectedYear}`, "", router).then(
+      Api(
+        "get",
+        `product/getMonthlySales?year=${selectedYear}`,
+        "",
+        router,
+      ).then(
         (res) => {
           console.log("res================>", res);
           props.loader(false);
@@ -117,7 +132,7 @@ function Home(props) {
           console.log(err);
           props.toaster({ type: "error", message: err?.data?.message });
           props.toaster({ type: "error", message: err?.message });
-        }
+        },
       );
     };
     getMonthlySales();
@@ -129,7 +144,7 @@ function Home(props) {
       "get",
       `product/getTopSoldProduct?page=${page}&limit=${limit}`,
       null,
-      router
+      router,
     ).then(
       (res) => {
         props.loader(false);
@@ -155,7 +170,7 @@ function Home(props) {
         props.loader(false);
         console.log(err);
         props.toaster({ type: "error", message: err?.message });
-      }
+      },
     );
   };
 
@@ -165,7 +180,7 @@ function Home(props) {
       "get",
       `product/getLowStockProduct?page=${page}&limit=${limit}`,
       null,
-      router
+      router,
     ).then(
       (res) => {
         props.loader(false);
@@ -183,16 +198,15 @@ function Home(props) {
         props.loader(false);
         console.log(err);
         props.toaster({ type: "error", message: err?.message });
-      }
+      },
     );
   };
 
-  const COLORS = ['#FE4F01', '#127300', '#1a1a1a', '#FFC107'];
+  const COLORS = ["#FE4F01", "#127300", "#1a1a1a", "#FFC107"];
 
   return (
     <section className="min-h-screen bg-gray-50 p-4 md:p-6 h-full overflow-y-scroll scrollbar-hide overflow-scroll md:pb-24 pb-24 ">
       <div className="max-w-7xl mx-auto space-y-6">
-
         <div className="relative overflow-hidden bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
           <div className="absolute top-0 right-0 w-64 h-64 bg-black/5 rounded-full -translate-y-32 translate-x-32"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#e5e5e5]/5 rounded-full translate-y-24 -translate-x-24"></div>
@@ -214,7 +228,9 @@ function Home(props) {
                 <div className="text-black font-bold text-sm">LIVE STATUS</div>
                 <div className="flex items-center mt-1">
                   <div className="w-2 h-2 bg-[#e5e5e5] rounded-full mr-2"></div>
-                  <span className="text-gray-700 text-sm">All Systems Active</span>
+                  <span className="text-gray-700 text-sm">
+                    All Systems Active
+                  </span>
                 </div>
               </div>
             </div>
@@ -227,40 +243,38 @@ function Home(props) {
             value={AllData?.totalUsers || "1,247"}
             icon={<Users size={28} />}
             accentColor="#000"
-
           />
           <ModernStatsCard
             title="Categories"
-            value={AllData?.totalCategories || "89"}
+            value={AllData?.totalCategories || "0"}
             icon={<Layers size={28} />}
             accentColor="#000"
-
           />
           <ModernStatsCard
-            title="Revenue"
-            value={`${constant.currency}${AllData?.totalTransactionAmount || "89,420"}`}
+            title={`Revenue (${constant.currency}) `}
+            value={`${AllData?.totalTransactionAmount || "0"}`}
             icon={<DollarSign size={28} />}
             accentColor="#000"
-
           />
           <ModernStatsCard
             title="Queries"
-            value={AllData?.totalFeedbacks || "156"}
+            value={AllData?.totalFeedbacks || "0"}
             icon={<HelpCircle size={28} />}
-
             accentColor="#000"
-
           />
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
- 
           <div className="xl:col-span-2 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
             <div className="p-6">
               <div className="flex justify-between items-center">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Revenue Analytics</h2>
-                  <p className="text-gray-500 mt-1">Track your business performance</p>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Revenue Analytics
+                  </h2>
+                  <p className="text-gray-500 mt-1">
+                    Track your business performance
+                  </p>
                 </div>
                 <div className="flex items-center space-x-4">
                   <select
@@ -287,20 +301,33 @@ function Home(props) {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={salesData}>
                   <defs>
-                    <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
+                    <linearGradient
+                      id="salesGradient"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
                       <stop offset="5%" stopColor="#FE4F01" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#FE4F01" stopOpacity={0.1} />
+                      <stop
+                        offset="95%"
+                        stopColor="#FE4F01"
+                        stopOpacity={0.1}
+                      />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                   <XAxis dataKey="name" stroke="#6b7280" />
-                  <YAxis stroke="#6b7280" tickFormatter={(value) => `$${value}`} />
+                  <YAxis
+                    stroke="#6b7280"
+                    tickFormatter={(value) => `$${value}`}
+                  />
                   <RechartsTooltip
                     contentStyle={{
-                      backgroundColor: '#fff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '8px',
-                      color: '#374151'
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      color: "#374151",
                     }}
                     formatter={(value) => [`$${value}`, "Revenue"]}
                   />
@@ -334,23 +361,29 @@ function Home(props) {
                     dataKey="sold"
                   >
                     {topSellingProducts.slice(0, 4).map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={COLORS[index % COLORS.length]}
+                      />
                     ))}
                   </Pie>
                   <RechartsTooltip
                     formatter={(value, name) => [value, "Sold"]}
                     contentStyle={{
-                      backgroundColor: '#fff',
-                      border: '1px solid #e5e7eb',
-                      borderRadius: '8px',
-                      color: '#374151'
+                      backgroundColor: "#fff",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      color: "#374151",
                     }}
                   />
                 </PieChart>
               </ResponsiveContainer>
               <div className="grid grid-cols-2 gap-2 mt-4">
                 {topSellingProducts.slice(0, 4).map((product, index) => (
-                  <div key={index} className="flex items-center text-sm text-gray-700">
+                  <div
+                    key={index}
+                    className="flex items-center text-sm text-gray-700"
+                  >
                     <div
                       className="w-3 h-3 rounded-full mr-2"
                       style={{ backgroundColor: COLORS[index] }}
@@ -364,7 +397,6 @@ function Home(props) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20">
-
           {/* Top Products Table */}
           <div className="lg:col-span-2 bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden">
             <div className="bg-[#e5e5e5] p-6 text-black">
@@ -374,10 +406,14 @@ function Home(props) {
                     <TrendingUp className="mr-2" size={24} />
                     Bestsellers
                   </h2>
-                  <p className="text-black mt-1">Your top performing products</p>
+                  <p className="text-black mt-1">
+                    Your top performing products
+                  </p>
                 </div>
                 <div className="bg-black px-4 py-2 rounded-lg">
-                  <span className="text-sm font-medium text-white">Live Data</span>
+                  <span className="text-sm font-medium text-white">
+                    Live Data
+                  </span>
                 </div>
               </div>
             </div>
@@ -386,15 +422,26 @@ function Home(props) {
               <table className="min-w-full">
                 <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">Product</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">Sold</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">Stock</th>
-                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">Price</th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">
+                      Product
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">
+                      Sold
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">
+                      Stock
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-bold text-[#127300] uppercase tracking-wider">
+                      Price
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {productList.map((product, index) => (
-                    <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
+                    <tr
+                      key={index}
+                      className="hover:bg-gray-50 transition-colors duration-200"
+                    >
                       <td className="px-6 py-4">
                         <div className="font-medium truncate max-w-xs text-gray-900">
                           {product?.name}
@@ -406,13 +453,20 @@ function Home(props) {
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${product?.pieces < 10 ? 'bg-black/10 text-black' : 'bg-[#e5e5e5]/10 text-[#127300]'
-                          }`}>
+                        <span
+                          className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+                            product?.pieces < 10
+                              ? "bg-black/10 text-black"
+                              : "bg-[#e5e5e5]/10 text-[#127300]"
+                          }`}
+                        >
                           {product?.pieces}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-gray-900 font-semibold">
-                        ${product?.varients?.[0]?.selected?.[0]?.offerprice || 'N/A'}
+                        $
+                        {product?.varients?.[0]?.selected?.[0]?.offerprice ||
+                          "N/A"}
                       </td>
                     </tr>
                   ))}
@@ -432,14 +486,17 @@ function Home(props) {
 
             <div className="p-6 space-y-4 max-h-full overflow-y-auto">
               {lowStock.map((product, index) => (
-                <div key={index} className="flex items-center p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div
+                  key={index}
+                  className="flex items-center p-4 bg-gray-50 rounded-xl border border-gray-200"
+                >
                   <div className="flex-shrink-0">
                     <img
                       src={product?.varients?.[0]?.image?.[0]}
                       alt={product?.name}
                       className="w-16 h-16 object-cover rounded-lg border border-gray-200 shadow-sm"
                       onError={(e) => {
-                        e.target.src = '/api/placeholder/48/48';
+                        e.target.src = "/api/placeholder/48/48";
                       }}
                     />
                   </div>
@@ -464,7 +521,6 @@ function Home(props) {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

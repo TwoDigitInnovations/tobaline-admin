@@ -287,10 +287,6 @@ function Products(props) {
       0,
     );
 
-    console.log(varients);
-    console.log(varients[0]?.image);
-    console.log(!varients[0]?.image[0]);
-
     if (!varients[0].image || !varients[0]?.image[0]) {
       return props.toaster({
         type: "error",
@@ -688,13 +684,13 @@ function Products(props) {
               </div>
             </div>
 
-            <div className="border border-custom-lightGrays rounded-[8px] md:mt-10 mt-5 px-5 pt-5">
+            <div className="border border-custom-lightGrays rounded-[8px] md:mt-10 mt-5 px-2 md:px-5 pt-5">
               <p className="text-black text-2xl font-bold	NunitoSans pb-5">
                 Varients
               </p>
               {varients.map((item, i) => (
                 <div key={i} className="w-full" id={i}>
-                  <div className="border border-custom-lightGrays  rounded-[8px] p-5 mb-5 relative">
+                  <div className="border border-custom-lightGrays  rounded-[8px] p-3 md:p-5 mb-5 relative">
                     <IoCloseCircleOutline
                       className="text-red-700 cursor-pointer h-5 w-5 absolute top-[20px] right-[20px]"
                       onClick={() => {
@@ -709,11 +705,11 @@ function Products(props) {
                         (attr) => attr.name.toLowerCase() === "color",
                       ) && (
                         <div className="w-full md:w-[400px] px-2 md:px-0">
-                          <p className="text-gray-800 text-sm font-semibold NunitoSans pb-[15px] pl-[50px]">
+                          <p className="text-gray-800 text-sm font-semibold NunitoSans pb-[15px] ">
                             Color
                           </p>
                           <div className="flex justify-start items-center w-full">
-                            <p className="text-gray-800 text-sm font-semibold">
+                            <p className="text-gray-800 text-md font-semibold">
                               S.no {i + 1}
                             </p>
                             <div className="relative w-full">
@@ -1119,10 +1115,10 @@ function Products(props) {
 
             <div className="flex justify-center items-center md:mt-10 mt-5 gap-5">
               <button
-                className="bg-black md:h-[45px] h-[40px] w-[177px] rounded-[12px]  text-white font-normal text-base"
+                className="bg-black md:h-[45px] h-[40px] cursor-pointer px-8 rounded-[12px]  text-white font-normal text-base"
                 type="submit"
               >
-                {router.query.id ? "Update" : "Submit"}
+                {router.query.id ? "Update Product Details" : "Add Product Details"}
               </button>
             </div>
           </form>

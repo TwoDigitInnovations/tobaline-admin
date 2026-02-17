@@ -366,13 +366,12 @@ function Products(props) {
     unit: "px",
     x: 0,
     y: 0,
-    width: 200, // default
-    height: 200, // default
-    aspect: 1, // optional (square maintain karne ke liye)
+    width: 200,
+    height: 300, // 2:3 ratio ke liye
+    aspect: 2 / 3,
   });
 
   const [src, setSrc] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
   const [cropIndex, setCropIndex] = useState(null);
 
   const getCroppedImg = (image, crop) => {
@@ -999,7 +998,7 @@ function Products(props) {
                             <ReactCrop
                               crop={crop}
                               onChange={(newCrop) => setCrop(newCrop)}
-                              aspect={1}
+                              aspect={ 2 / 3}
                             >
                               <img
                                 id="crop-image"
@@ -1118,7 +1117,9 @@ function Products(props) {
                 className="bg-black md:h-[45px] h-[40px] cursor-pointer px-8 rounded-[12px]  text-white font-normal text-base"
                 type="submit"
               >
-                {router.query.id ? "Update Product Details" : "Add Product Details"}
+                {router.query.id
+                  ? "Update Product Details"
+                  : "Add Product Details"}
               </button>
             </div>
           </form>
